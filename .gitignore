@@ -1,0 +1,7 @@
+docker/nginx/openssl
+.env
+microsoft.gpg
+.DS_Store
+.idea
+ubuntu*.log
+.vagrant
