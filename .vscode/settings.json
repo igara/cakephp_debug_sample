@@ -1,20 +1,4 @@
 {
-    "saveAndRun": {
-        "commands": [
-            {
-                "match": "\\.php$",
-                "cmd": "docker exec cakephp_debug_sample_php-fpm_1 bash -c \"cd /var/www/cakephp && vendor/bin/php-cs-fixer -vvv fix ${relativeFile}\"",
-                "useShortcut": false,
-                "silent": true
-            },
-            {
-                "match": "\\Test.php$",
-                "cmd": "docker exec cakephp_debug_sample_php-fpm_1 bash -c \"cd /var/www/cakephp && vendor/bin/phpunit ${cwd}\"",
-                "useShortcut": false,
-                "silent": true
-            }
-        ]
-    },
     "eslint.enable": true,
     "prettier.stylelintIntegration": true,
     "editor.formatOnSave": true,

@@ -3,5 +3,3 @@ docker/nginx/openssl
 microsoft.gpg
 .DS_Store
 .idea
-ubuntu*.log
-.vagrant

@@ -8,11 +8,8 @@
             "name": "Listen for XDebug",
             "type": "php",
             "request": "launch",
-            "port": 9012,
-            "stopOnEntry": false,
-            "pathMappings": {
-                "/var/www/cakephp": "${workspaceRoot}"
-            }
+            "port": 9001,
+            "stopOnEntry": false
         }
     ]
 }

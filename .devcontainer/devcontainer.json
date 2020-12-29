@@ -1,0 +1,16 @@
+{
+	"name": "Existing Docker Compose (Extend)",
+	"dockerComposeFile": [
+		"../docker-compose.yml"
+	],
+	"service": "php-fpm",
+	"workspaceFolder": "/var/www",
+	"settings": {
+		"terminal.integrated.shell.linux": null
+	},
+	"extensions": [
+		"felixfbecker.php-debug",
+		"felixfbecker.php-intellisense",
+		"ms-vscode-remote.vscode-remote-extensionpack"
+	]
+}

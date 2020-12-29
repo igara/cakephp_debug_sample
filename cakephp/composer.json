@@ -18,7 +18,8 @@
         "friendsofphp/php-cs-fixer": "^2.16",
         "josegonzalez/dotenv": "^3.2",
         "phpunit/phpunit": "~8.5.0",
-        "psy/psysh": "@stable"
+        "psy/psysh": "@stable",
+        "spatie/phpunit-watcher": "^1.23"
     },
     "suggest": {
         "markstory/asset_compress": "An asset compression plugin which provides file concatenation and a flexible filter system for preprocessing and minification.",
