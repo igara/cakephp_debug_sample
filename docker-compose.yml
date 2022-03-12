@@ -21,7 +21,7 @@ services:
     build: ./docker/php-fpm
     volumes:
       - .:/var/www:cached
-      - ./docker/php-fpm/php.ini:/usr/local/etc/php/php.ini
+      - ./docker/php-fpm/xdebug.ini:/usr/local/etc/php/xdebug.ini
     links:
       - mysql
     env_file:

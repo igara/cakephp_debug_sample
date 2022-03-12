@@ -9,3 +9,4 @@ RUN apt-get update \
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer && \
   composer config -g process-timeout 3600 && \
   composer config -g repos.packagist composer https://packagist.jp
+RUN composer global require spatie/phpunit-watcher

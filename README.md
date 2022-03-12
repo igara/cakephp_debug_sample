@@ -28,7 +28,7 @@ Reopen in Container からコンテナ上に VSCode を起動させる
 
 ```
 cd /var/www/cakephp
-./vendor/bin/phpunit-watcher watch
+~/.composer/vendor/bin/phpunit-watcher watch
 ```
 
 ## メモ
