@@ -1,6 +1,4 @@
 {
-    "eslint.enable": true,
-    "prettier.stylelintIntegration": true,
     "editor.formatOnSave": true,
     "editor.formatOnPaste": false,
     "editor.formatOnType": false,

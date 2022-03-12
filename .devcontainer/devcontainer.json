@@ -9,8 +9,7 @@
 		"terminal.integrated.shell.linux": null
 	},
 	"extensions": [
-		"felixfbecker.php-debug",
-		"felixfbecker.php-intellisense",
+		"xdebug.php-pack",
 		"ms-vscode-remote.vscode-remote-extensionpack"
 	]
 }
