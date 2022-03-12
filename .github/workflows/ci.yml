@@ -60,8 +60,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        with:
-          path: cakephp
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
