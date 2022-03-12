@@ -29,8 +29,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        with:
-          path: cakephp
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -38,6 +36,10 @@ jobs:
           php-version: ${{ matrix.php-version }}
           extensions: mbstring, intl, simplexml, pdo_mysql
           coverage: none
+
+      - name: Change Directory
+        run: |
+          cd cakephp
 
       - name: Composer install
         run: |
@@ -70,6 +72,10 @@ jobs:
           extensions: mbstring, intl, simplexml, pdo_mysql
           coverage: none
 
+      - name: Change Directory
+        run: |
+          cd cakephp
+
       - name: Composer install
         run: composer install
 
@@ -82,8 +88,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        with:
-          path: cakephp
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -91,6 +95,10 @@ jobs:
           php-version: "7.2"
           extensions: mbstring, intl, simplexml, pdo_mysql
           coverage: none
+
+      - name: Change Directory
+        run: |
+          cd cakephp
 
       - name: Composer install
         run: composer require --dev phpstan/phpstan:^1.0.0
