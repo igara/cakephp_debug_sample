@@ -9,7 +9,11 @@
             "type": "php",
             "request": "launch",
             "port": 9001,
-            "stopOnEntry": false
+            "hostname": "0.0.0.0",
+            "stopOnEntry": false,
+            "pathMappings": {
+                "/var/www": "${workspaceRoot}"
+            }
         }
     ]
 }

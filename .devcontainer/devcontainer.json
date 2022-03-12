@@ -8,6 +8,9 @@
 	"settings": {
 		"terminal.integrated.shell.linux": null
 	},
+	"forwardPorts": [
+		9001
+	],
 	"extensions": [
 		"xdebug.php-pack",
 		"ms-vscode-remote.vscode-remote-extensionpack"
