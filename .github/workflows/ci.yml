@@ -73,12 +73,7 @@ jobs:
       - name: Composer install
         run: |
           cd cakephp
-          if [[ ${{ matrix.php-version }} == '8.1' ]]; then
-            composer update --ignore-platform-reqs
-          else
-            composer update
-          fi
-          composer run-script post-install-cmd --no-interaction
+          composer install
 
       - name: Run PHP CodeSniffer
         run: |
@@ -102,12 +97,7 @@ jobs:
       - name: Composer install
         run: |
           cd cakephp
-          if [[ ${{ matrix.php-version }} == '8.1' ]]; then
-            composer update --ignore-platform-reqs
-          else
-            composer update
-          fi
-          composer run-script post-install-cmd --no-interaction
+          composer install
 
       - name: Run phpstan
         run: |
