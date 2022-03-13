@@ -9,18 +9,6 @@ jobs:
   testsuite:
     runs-on: ubuntu-18.04
 
-    services:
-      mysql:
-        image: mysql:8
-        ports:
-          - 3306:3306
-        env:
-          MYSQL_ROOT_PASSWORD: xxxxxxxxxx
-          MYSQL_DATABASE: xxxxxxxxxx
-          MYSQL_USER: xxxxxxxxxx
-          MYSQL_PASSWORD: xxxxxxxxxx
-        options: --health-cmd "mysqladmin ping -h localhost" --health-interval 20s --health-timeout 10s --health-retries 10
-
     strategy:
       fail-fast: false
       matrix:
@@ -29,7 +17,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
+      - name: Setup env
+        run: |
+          cd cakephp
+          cp config/app_local.example.php config/app_local.php
+          cp config/.env.example config/.env
+      - name: Setup MySQL
+        shell: bash
+        run: |
+          docker-compose up -d
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -50,8 +46,6 @@ jobs:
       - name: Run PHPUnit
         run: |
           cd cakephp
-          cp config/app_local.example.php config/app_local.php
-          cp config/.env.example config/.env
           vendor/bin/phpunit
 
   coding-standard:
