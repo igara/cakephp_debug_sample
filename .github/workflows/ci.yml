@@ -21,7 +21,7 @@ jobs:
           docker-compose up -d
       - name: Composer install
         run: |
-          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/cakephp && composer self-update --1 && composer run-script post-install-cmd --no-interaction"
+          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/cakephp && composer run-script post-install-cmd --no-interaction"
       - name: Run PHPUnit
         run: |
           docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/cakephp && composer test"
@@ -43,7 +43,7 @@ jobs:
           docker-compose up -d
       - name: Composer install
         run: |
-          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/cakephp && composer self-update --1 && composer run-script post-install-cmd --no-interaction"
+          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/cakephp && composer run-script post-install-cmd --no-interaction"
       - name: Run PHP CodeSniffer
         run: |
           docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/cakephp && composer cs-check"
@@ -65,7 +65,7 @@ jobs:
           docker-compose up -d
       - name: Composer install
         run: |
-          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/cakephp && composer self-update --1 && composer run-script post-install-cmd --no-interaction"
+          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/cakephp && composer run-script post-install-cmd --no-interaction"
       - name: Run phpstan
         run: |
           docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/cakephp && vendor/bin/phpstan"
