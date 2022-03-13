@@ -8,45 +8,23 @@ on:
 jobs:
   testsuite:
     runs-on: ubuntu-18.04
-
-    strategy:
-      fail-fast: false
-      matrix:
-        php-version: ["8.0", "8.1"]
-    name: PHP ${{ matrix.php-version }}
-
     steps:
       - uses: actions/checkout@v2
+      - name: Setup env
+        run: |
+          cd cakephp
+          cp config/app_local.example.php config/app_local.php
+          cp config/.env.example config/.env
       - name: Setup MySQL
         shell: bash
         run: |
-          cd cakephp
-          cp config/app_local.example.php config/app_local.php
-          cp config/.env.example config/.env
           docker-compose up -d
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php-version }}
-          extensions: mbstring, intl, simplexml, pdo_mysql
-          coverage: none
-
       - name: Composer install
         run: |
-          cd cakephp
-          if [[ ${{ matrix.php-version }} == '8.1' ]]; then
-            composer update --ignore-platform-reqs
-          else
-            composer update
-          fi
-          composer run-script post-install-cmd --no-interaction
-
+          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/cakephp && composer self-update --1 && composer install"
       - name: Run PHPUnit
         run: |
-          cd cakephp
-          cp config/app_local.example.php config/app_local.php
-          cp config/.env.example config/.env
-          vendor/bin/phpunit
+          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/cakephp && composer test"
 
   coding-standard:
     name: Coding Standard
@@ -54,24 +32,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: "8.0"
-          extensions: mbstring, intl, simplexml, pdo_mysql
-          coverage: none
-
       - name: Composer install
         run: |
-          cd cakephp
-          composer update
-          composer run-script post-install-cmd --no-interaction
-
+          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/cakephp && composer self-update --1 && composer install"
       - name: Run PHP CodeSniffer
         run: |
-          cd cakephp
-          composer cs-check
+          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/cakephp && composer cs-check"
 
   static-analysis:
     name: Static Analysis
@@ -79,21 +45,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: "8.0"
-          extensions: mbstring, intl, simplexml, pdo_mysql
-          coverage: none
-
       - name: Composer install
         run: |
-          cd cakephp
-          composer update
-          composer run-script post-install-cmd --no-interaction
+          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/cakephp && composer self-update --1 && composer install"
 
       - name: Run phpstan
         run: |
-          cd cakephp
-          vendor/bin/phpstan
+          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/cakephp && vendor/bin/phpstan"
