@@ -28,18 +28,14 @@ services:
       - cakephp/config/.env
 
   mysql:
-    image: mysql:8
+    build: ./docker/mysql
     ports:
       - 3306:3306
     env_file:
-      - cakephp/config/.env
+      - ./cakephp/config/.env
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       TZ: Asia/Tokyo
     volumes:
-      - ./docker/mysql/etc-mysql.cnf:/etc/mysql/conf.d/etc-mysql.cnf
+      - ./docker/mysql:/mysql
       - ./docker/mysql/init:/docker-entrypoint-initdb.d
       - mysql-data:/var/lib/mysql

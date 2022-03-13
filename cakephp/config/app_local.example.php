@@ -67,9 +67,9 @@ return [
             //'port' => 'non_standard_port_number',
             'username' => env('MYSQL_USER', 'xxxxxxxxxx'),
             'password' => env('MYSQL_PASSWORD', 'xxxxxxxxxx'),
-            'database' => 'app_test',
+            'database' =>  env('MYSQL_TEST_DATABASE', 'app_test'),
             //'schema' => 'myapp',
-            'url' => env('DATABASE_TEST_URL', 'sqlite://127.0.0.1/tests.sqlite'),
+            'url' => env('DATABASE_TEST_URL', null),
         ],
     ],
 
