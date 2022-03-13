@@ -15,7 +15,7 @@ jobs:
           cd cakephp
           cp config/app_local.example.php config/app_local.php
           cp config/.env.example config/.env
-      - name: Setup MySQL
+      - name: Docker Run
         shell: bash
         run: |
           docker-compose up -d
@@ -32,6 +32,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Docker Run
+        shell: bash
+        run: |
+          docker-compose up -d
       - name: Composer install
         run: |
           docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/cakephp && composer self-update --1 && composer install"
@@ -45,10 +49,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Docker Run
+        shell: bash
+        run: |
+          docker-compose up -d
       - name: Composer install
         run: |
           docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/cakephp && composer self-update --1 && composer install"
-
       - name: Run phpstan
         run: |
           docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/cakephp && vendor/bin/phpstan"
