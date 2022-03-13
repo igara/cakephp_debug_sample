@@ -32,6 +32,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Setup env
+        run: |
+          cd cakephp
+          cp config/app_local.example.php config/app_local.php
+          cp config/.env.example config/.env
       - name: Docker Run
         shell: bash
         run: |
@@ -49,6 +54,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Setup env
+        run: |
+          cd cakephp
+          cp config/app_local.example.php config/app_local.php
+          cp config/.env.example config/.env
       - name: Docker Run
         shell: bash
         run: |
