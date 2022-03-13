@@ -17,14 +17,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Setup env
+      - name: Setup MySQL
+        shell: bash
         run: |
           cd cakephp
           cp config/app_local.example.php config/app_local.php
           cp config/.env.example config/.env
-      - name: Setup MySQL
-        shell: bash
-        run: |
           docker-compose up -d
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -46,6 +44,8 @@ jobs:
       - name: Run PHPUnit
         run: |
           cd cakephp
+          cp config/app_local.example.php config/app_local.php
+          cp config/.env.example config/.env
           vendor/bin/phpunit
 
   coding-standard:
