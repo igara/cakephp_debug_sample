@@ -1,0 +1,134 @@
+name: core
+
+on:
+  schedule:
+    - cron: "00 09 * * *"
+  push:
+    branches:
+      - "master"
+
+jobs:
+  testsuite:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: app install
+        run: |
+          sudo apt-get install -y software-properties-common
+          sudo apt-get update
+          sudo add-apt-repository -y ppa:git-core/ppa
+          sudo apt-get update
+          sudo apt-get install -y git
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          token: ${{ github.token }}
+          submodules: true
+      - name: Checkout submodule
+        run: |
+          git submodule update --init --remote projects/cakephp/cakephp_debug_sample_projects_core
+          (cd projects/cakephp/cakephp_debug_sample_projects_core && git checkout main && git pull)
+          git submodule update --init --remote projects/cakephp/cakephp_debug_sample_projects_www
+          (cd projects/cakephp/cakephp_debug_sample_projects_www && git checkout main && git pull)
+      - name: Setup env
+        run: |
+          cp .env.example .env
+          (cd projects/cakephp/cakephp_debug_sample_projects_core && cp config/app_local.example.php config/app_local.php)
+          (cd projects/cakephp/cakephp_debug_sample_projects_www && cp config/app_local.example.php config/app_local.php)
+      - name: Docker Run
+        shell: bash
+        run: |
+          docker-compose up -d
+      - name: Composer install
+        run: |
+          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_core && composer install"
+          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_www && composer install"
+      - name: Run PHPUnit
+        run: |
+          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_core && composer test"
+          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_www && composer test"
+
+  coding-standard:
+    name: Coding Standard
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: app install
+        run: |
+          sudo apt-get install -y software-properties-common
+          sudo apt-get update
+          sudo add-apt-repository -y ppa:git-core/ppa
+          sudo apt-get update
+          sudo apt-get install -y git
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          token: ${{ github.token }}
+          submodules: true
+      - name: Checkout submodule
+        run: |
+          git submodule update --init --remote projects/cakephp/cakephp_debug_sample_projects_core
+          (cd projects/cakephp/cakephp_debug_sample_projects_core && git checkout main && git pull)
+          git submodule update --init --remote projects/cakephp/cakephp_debug_sample_projects_www
+          (cd projects/cakephp/cakephp_debug_sample_projects_www && git checkout main && git pull)
+      - name: Setup env
+        run: |
+          cp .env.example .env
+          (cd projects/cakephp/cakephp_debug_sample_projects_core && cp config/app_local.example.php config/app_local.php)
+          (cd projects/cakephp/cakephp_debug_sample_projects_www && cp config/app_local.example.php config/app_local.php)
+      - name: Docker Run
+        shell: bash
+        run: |
+          docker-compose up -d
+      - name: Composer install
+        run: |
+          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_core && composer install"
+          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_www && composer install"
+      - name: Run PHP CodeSniffer
+        run: |
+          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_core && composer cs-check"
+          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_www && composer cs-check"
+
+  static-analysis:
+    name: Static Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: app install
+        run: |
+          sudo apt-get install -y software-properties-common
+          sudo apt-get update
+          sudo add-apt-repository -y ppa:git-core/ppa
+          sudo apt-get update
+          sudo apt-get install -y git
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          token: ${{ github.token }}
+          submodules: true
+      - name: Checkout submodule
+        run: |
+          git submodule update --init --remote projects/cakephp/cakephp_debug_sample_projects_core
+          (cd projects/cakephp/cakephp_debug_sample_projects_core && git checkout main && git pull)
+          git submodule update --init --remote projects/cakephp/cakephp_debug_sample_projects_www
+          (cd projects/cakephp/cakephp_debug_sample_projects_www && git checkout main && git pull)
+      - name: Setup env
+        run: |
+          cp .env.example .env
+          (cd projects/cakephp/cakephp_debug_sample_projects_core && cp config/app_local.example.php config/app_local.php)
+          (cd projects/cakephp/cakephp_debug_sample_projects_www && cp config/app_local.example.php config/app_local.php)
+      - name: Docker Run
+        shell: bash
+        run: |
+          docker-compose up -d
+      - name: Composer install
+        run: |
+          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_core && composer install"
+          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_www && composer install"
+      - name: Run phpstan
+        run: |
+          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_core && vendor/bin/phpstan"
+          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_www && vendor/bin/phpstan"
