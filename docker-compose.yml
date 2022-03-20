@@ -25,7 +25,7 @@ services:
     container_name: cakephp_debug_sample_php-fpm
     volumes:
       - .:/var/www:cached
-      - ./docker/php-fpm/xdebug.ini:/usr/local/etc/php/xdebug.ini
+      - ./docker/php-fpm/xdebug.ini:/usr/local/etc/php/php.ini
     links:
       - mysql
     env_file:
