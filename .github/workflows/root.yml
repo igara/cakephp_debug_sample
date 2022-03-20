@@ -42,12 +42,12 @@ jobs:
           docker-compose up -d
       - name: Composer install
         run: |
-          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_core && composer install"
-          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_www && composer install"
+          docker exec cakephp_debug_sample_php-fpm bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_core && composer install"
+          docker exec cakephp_debug_sample_php-fpm bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_www && composer install"
       - name: Run PHPUnit
         run: |
-          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_core && composer test"
-          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_www && composer test"
+          docker exec cakephp_debug_sample_php-fpm bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_core && composer test"
+          docker exec cakephp_debug_sample_php-fpm bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_www && composer test"
 
   coding-standard:
     name: Coding Standard
@@ -84,12 +84,12 @@ jobs:
           docker-compose up -d
       - name: Composer install
         run: |
-          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_core && composer install"
-          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_www && composer install"
+          docker exec cakephp_debug_sample_php-fpm bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_core && composer install"
+          docker exec cakephp_debug_sample_php-fpm bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_www && composer install"
       - name: Run PHP CodeSniffer
         run: |
-          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_core && composer cs-check"
-          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_www && composer cs-check"
+          docker exec cakephp_debug_sample_php-fpm bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_core && composer cs-check"
+          docker exec cakephp_debug_sample_php-fpm bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_www && composer cs-check"
 
   static-analysis:
     name: Static Analysis
@@ -126,9 +126,9 @@ jobs:
           docker-compose up -d
       - name: Composer install
         run: |
-          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_core && composer install"
-          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_www && composer install"
+          docker exec cakephp_debug_sample_php-fpm bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_core && composer install"
+          docker exec cakephp_debug_sample_php-fpm bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_www && composer install"
       - name: Run phpstan
         run: |
-          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_core && vendor/bin/phpstan"
-          docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_www && vendor/bin/phpstan"
+          docker exec cakephp_debug_sample_php-fpm bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_core && vendor/bin/phpstan"
+          docker exec cakephp_debug_sample_php-fpm bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_www && vendor/bin/phpstan"

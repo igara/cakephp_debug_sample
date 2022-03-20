@@ -13,7 +13,7 @@ mkcert -install
 docker-compose up
 
 # 別ターミナルで作業する
-docker exec cakephp_debug_sample_php-fpm_1 bash -c "cd /var/www/cakephp && composer self-update --1 && composer install"
+docker exec cakephp_debug_sample_php-fpm bash -c "cd /var/www/cakephp && composer self-update --1 && composer install"
 
 # docker-compose up したターミナルでコンテナ起動し直す
 docker-compose down
@@ -36,7 +36,7 @@ cd /var/www/cakephp
 コンテナに入るとき
 
 ```
-docker exec -it cakephp_debug_sample_php-fpm_1 bash
+docker exec -it cakephp_debug_sample_php-fpm bash
 ```
 
 composer 1 系を使用するとき

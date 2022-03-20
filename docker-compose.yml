@@ -7,6 +7,7 @@ volumes:
 services:
   nginx:
     image: nginx:1.20-alpine
+    container_name: cakephp_debug_sample_nginx
     ports:
       - 80:80
       - 443:443
@@ -21,6 +22,7 @@ services:
 
   php-fpm:
     build: ./docker/php-fpm
+    container_name: cakephp_debug_sample_php-fpm
     volumes:
       - .:/var/www:cached
       - ./docker/php-fpm/xdebug.ini:/usr/local/etc/php/xdebug.ini
@@ -31,6 +33,7 @@ services:
 
   mysql:
     build: ./docker/mysql
+    container_name: cakephp_debug_sample_mysql
     ports:
       - 3306:3306
     env_file:
