@@ -5,6 +5,7 @@
         // Extension identifier format: ${publisher}.${name}. Example: vscode.csharp
         "xdebug.php-pack",
         "ms-vscode-remote.vscode-remote-extensionpack",
+        "bmewburn.vscode-intelephense-client",
         "mechatroner.rainbow-csv"
     ]
 }
