@@ -5,14 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Listen for XDebug",
+            "name": "WWW Listen for XDebug",
             "type": "php",
             "request": "launch",
             "port": 9001,
             "hostname": "0.0.0.0",
             "stopOnEntry": false,
             "pathMappings": {
-                "/var/www": "${workspaceRoot}"
+                "/var/www/projects/www": "${workspaceRoot}"
             }
         }
     ]
