@@ -2,8 +2,9 @@
 
 ```
 # 環境変数の適応
-(cp ./cakephp/config/.env.example ./cakephp/config/.env)
-(cp ./cakephp/config/app_local.example.php ./cakephp/config/app_local.php)
+(cp .env.example .env)
+(cp projects/cakephp/cakephp_debug_sample_projects_core && cp config/app_local.example.php config/app_local.php)
+(cp projects/cakephp/cakephp_debug_sample_projects_www && cp config/app_local.example.php config/app_local.php)
 
 # オレオレ証明書作成
 brew install mkcert
@@ -13,7 +14,11 @@ mkcert -install
 docker-compose up
 
 # 別ターミナルで作業する
-docker exec cakephp_debug_sample_php-fpm bash -c "cd /var/www/cakephp && composer self-update --1 && composer install"
+
+## composer install
+docker exec cakephp_debug_sample_php-fpm bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_core && composer install"
+docker exec cakephp_debug_sample_php-fpm bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_www && composer install"
+
 
 # docker-compose up したターミナルでコンテナ起動し直す
 docker-compose down
@@ -27,8 +32,15 @@ Reopen in Container からコンテナ上に VSCode を起動させる
 ### テスト実行
 
 ```
-cd /var/www/cakephp
-~/.composer/vendor/bin/phpunit-watcher watch
+docker exec cakephp_debug_sample_php-fpm bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_core && ~/.composer/vendor/bin/phpunit-watcher watch"
+docker exec cakephp_debug_sample_php-fpm bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_www && ~/.composer/vendor/bin/phpunit-watcher watch"
+```
+
+### Core を更新するとき
+
+```
+docker exec cakephp_debug_sample_php-fpm bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_www && composer update projects/core"
+docker exec cakephp_debug_sample_php-fpm bash -c "cd /var/www/projects/cakephp/cakephp_debug_sample_projects_www && composer dumpautoload"
 ```
 
 ## メモ
@@ -37,10 +49,4 @@ cd /var/www/cakephp
 
 ```
 docker exec -it cakephp_debug_sample_php-fpm bash
-```
-
-composer 1 系を使用するとき
-
-```
-composer self-update --1
 ```
