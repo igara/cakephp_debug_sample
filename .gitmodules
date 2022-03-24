@@ -6,7 +6,3 @@
 	path = projects/cakephp/cakephp_debug_sample_projects_www
 	url = https://github.com/igara/cakephp_debug_sample_projects_www.git
 	ignore = dirty
-[submodule "projects/cakephp/cakephp_debug_sample_projects_legacy_core"]
-	path = projects/cakephp/cakephp_debug_sample_projects_legacy_core
-	url = https://github.com/igara/cakephp_debug_sample_projects_legacy_core.git
-	ignore = dirty
